@@ -30,12 +30,12 @@
 %             - Draws the whole box "at once" (and not in two steps, as
 %               the normal beamer colorbox does) using the TikZ-Package
 %               and thus has a very easy to read code structure.
-%  
+%
 %   problems: - Uses your TikZ-Package (Not really a problem, I think.)
 %             - Overwrites the "\beamerboxesrounded" and the
 %               "\endbeamerboxesrounded" commands. (Not really a problem
 %               as well, I think.)
-% 
+%
 %   to do:    - Jet no custom parts page and only a very minimal
 %               title page.
 %             - Perhaps add custom "items" and "sections/subsections in
@@ -44,6 +44,8 @@
 \RequirePackage{keyval}
 \RequirePackage{tikz}
 \RequirePackage{mathtools}
+
+\usetikzlibrary{shadows.blur}
 
 \newif\ifbeamer@chamfered@shadow
 \DeclareOptionBeamer{shadow}[true]{\csname beamer@chamfered@shadow#1\endcsname}
@@ -103,7 +105,7 @@
   % lengths are set via beameroptions
 %  \bmb@corners=2pt
 %  \bmb@padding=2pt
-  % 
+  %
   \setbox\bmb@headbox=\hbox{%
     \begin{minipage}[b]{\bmb@width-\bmb@corners-\bmb@corners-\bmb@padding-\bmb@padding}%
       \usebeamercolor[fg]{\bmb@upper}%
@@ -114,7 +116,7 @@
     \ht\bmb@headbox=0pt%
     \dp\bmb@headbox=0pt%
     \bmb@headheight=0pt%
-    \bmb@headdepth=1.4ex% 
+    \bmb@headdepth=1.4ex%
     \bmb@headbodyseperation=0pt%
     {\usebeamercolor{\bmb@lower}% make head and body bg color equal if head is empty
      \globalcolorstrue%
@@ -155,11 +157,7 @@
       \fi
 
     \ifbeamer@chamfered@realshadow%
-      \foreach \x in {75,50,15}
-      {
-        \setlength{\tmpa}{1.25pt * 1/75 * \real{\x}}
-        \fill[xshift=0.4pt,yshift=-0.5pt,fill=black,opacity=0.3,rounded corners=\bmb@corners] (-\tmpa,-\bmb@headdepth-\bmb@headbodyseperation) -- (-\tmpa,\bmb@headheight+\bmb@padding+0.5pt+\tmpa) -- (\bmb@width+\tmpa,\bmb@headheight+\bmb@padding+0.5pt+\tmpa) -- (\bmb@width+\tmpa,-\bmb@headdepth-\bmb@headbodyseperation) -- (\bmb@width+\tmpa,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners-\tmpa) -- (-\tmpa,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners-\tmpa) -- (-\tmpa,-\bmb@headdepth-\bmb@headbodyseperation);
-      }
+      \shade[fill=upper.bg,rounded corners=\bmb@corners, blur shadow={shadow blur steps=15}] (0pt,\bmb@headheight+\bmb@padding+0.5pt) rectangle (\bmb@width,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners);
       \fi
 
     \ifbeamer@chamfered@outline% The 1pt offset added to \bmb@headdepth is a hack to fix the rounding errors of some stupid pdf viewers!
@@ -189,7 +187,7 @@
       \else%
       \vskip0.25em%
       {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-      \fi%     
+      \fi%
     \end{centering}
     \vskip1.5em\par
     \begin{centering}
@@ -221,6 +219,6 @@
 
 \mode<all>
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% TeX-master: "~/texmf/tex/latex/beamer/test/test.tex"
-%%% End: 
+%%% End:
