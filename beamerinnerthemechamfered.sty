@@ -96,11 +96,13 @@
     \usebeamercolor{\bmb@lower}%
     \globalcolorstrue%
     \colorlet{lower.bg}{bg}%
+    \colorlet{lower.fg}{fg}%
   }%
   {%
     \usebeamercolor{\bmb@upper}%
     \globalcolorstrue%
     \colorlet{upper.bg}{bg}%
+    \colorlet{upper.fg}{fg}%
   }%
   % lengths are set via beameroptions
 %  \bmb@corners=2pt
@@ -161,8 +163,8 @@
       \fi
 
     \ifbeamer@chamfered@outline% The 1pt offset added to \bmb@headdepth is a hack to fix the rounding errors of some stupid pdf viewers!
-      \filldraw[fill=upper.bg,draw=structure.fg,thin,rounded corners=\bmb@corners] (0pt,-\bmb@headdepth-1pt) -- (0pt,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,-\bmb@headdepth-1pt);
-      \filldraw[fill=lower.bg,draw=structure.fg,thin,rounded corners=\bmb@corners] (\bmb@width,-\bmb@headdepth+1pt) -- (\bmb@width,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth+1pt);
+      \filldraw[fill=upper.bg,draw=upper.fg,thin,rounded corners=\bmb@corners] (0pt,-\bmb@headdepth-1pt) -- (0pt,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,-\bmb@headdepth-1pt);
+      \filldraw[fill=lower.bg,draw=upper.fg,thin,rounded corners=\bmb@corners] (\bmb@width,-\bmb@headdepth+1pt) -- (\bmb@width,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth+1pt);
     \else
       \fill[fill=upper.bg,rounded corners=\bmb@corners] (0pt,-\bmb@headdepth-1pt) -- (0pt,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,\bmb@headheight+\bmb@padding+0.5pt) -- (\bmb@width,-\bmb@headdepth-1pt);
       \fill[fill=lower.bg,rounded corners=\bmb@corners] (\bmb@width,-\bmb@headdepth+1pt) -- (\bmb@width,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth-\bmb@headbodyseperation-\bmb@bodyheight-\bmb@bodydepth-\bmb@padding-\bmb@corners) -- (0pt,-\bmb@headdepth+1pt);
